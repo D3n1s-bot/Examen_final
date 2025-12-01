@@ -46,12 +46,55 @@ namespace Examen_final
             {
                 MessageBox.Show("Operación exitosa");
                 dataGridView1.DataSource = edificio.obtener();
-                //limpiar();
+                limpiar();
             }
             else
             {
                 MessageBox.Show("Error en la operación");
             }
+            
         }
-    } 
+        private void limpiar()
+        {
+            txtnom_e.Text = "";
+            txtdire.Text = "";
+            edificios_id = 0;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow fila = dataGridView1.SelectedRows[0];
+                edificios_id = Convert.ToInt32(fila.Cells["edificios_id"].Value);
+                txtnom_e.Text = fila.Cells["nombres"].Value.ToString();
+                txtdire.Text = fila.Cells["apellidos"].Value.ToString();
+               
+            }
+            else
+            {
+                MessageBox.Show("Seleccione una fila para editar.");
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
+            bool resultado = edificio.Eliminar(id);
+            if (resultado)
+            {
+                MessageBox.Show("Autor eliminado con éxito.");
+                dataGridView1.DataSource = edificio.obtener();
+            }
+            else
+            {
+                MessageBox.Show("Error al eliminar el autor.");
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+    }
 }    

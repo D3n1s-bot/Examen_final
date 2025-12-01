@@ -99,6 +99,7 @@
             this.button2.TabIndex = 7;
             this.button2.Text = "Editar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -108,6 +109,7 @@
             this.button1.TabIndex = 6;
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtampellidos
             // 
@@ -179,6 +181,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "empleadosfrm";
             this.Text = "empleadosfrm";
+            this.Load += new System.EventHandler(this.empleadosfrm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);

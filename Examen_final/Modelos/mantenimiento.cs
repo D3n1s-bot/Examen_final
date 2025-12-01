@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Examen_final.Modelos
 {
-    internal class obsoletos
+    internal class mantenimiento
     {
         public static DataTable obtener()
         {
@@ -17,7 +17,7 @@ namespace Examen_final.Modelos
             try
             {
                 cnn.conectar();
-                string consulta = "SELECT * FROM obsoletos";
+                string consulta = "SELECT * FROM mantenimientos";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 SqlDataAdapter adaptador = new SqlDataAdapter(cmd);
                 DataTable tabla = new DataTable();
@@ -26,7 +26,7 @@ namespace Examen_final.Modelos
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al obtener obsoletos: " + ex.Message);
+                MessageBox.Show("Error al obtener los mantenimientos: " + ex.Message);
                 return null;
             }
             finally
@@ -35,18 +35,20 @@ namespace Examen_final.Modelos
             }
 
         }
-        public static bool Crear(string informe, string motivo, string disposicion)
+        public static bool Crear(string tipo, string detalles,string costo, string fechayhora_recepcion, string fechayhora_devolucion)
         {
             conexion cnn = new conexion();
             try
             {
                 cnn.conectar();
-                string consulta = "INSERT INTO obsoletos (informe, motivo, disposicion) VALUES (@informe, @motivo, @disposicion)";
-                                 
+                string consulta = "INSERT INTO mantenimientos (tipos, detalles, costo, fechayhora_recepcion,fechayhora_devolucion) " +
+                                  "VALUES (@tipos, @detalles, @costo, @fechayhora_recepcion, @fechayhora_devolucion)";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
-                cmd.Parameters.AddWithValue("@informe",informe);
-                cmd.Parameters.AddWithValue("@motivo", motivo);
-                cmd.Parameters.AddWithValue("@costo", disposicion);
+                cmd.Parameters.AddWithValue("@tipo", tipo);
+                cmd.Parameters.AddWithValue("@detalles", detalles);
+                cmd.Parameters.AddWithValue("@costo", costo);
+                cmd.Parameters.AddWithValue("@fechayhora_devolucion", fechayhora_devolucion);
+                cmd.Parameters.AddWithValue("@fechayhora_recepcion", fechayhora_recepcion);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }
@@ -60,24 +62,27 @@ namespace Examen_final.Modelos
                 cnn.desconectar();
             }
         }
-        public static bool Editar(int obsoletos_id, string informe, string motivo, string disposicion)
+        public static bool Editar(int mantenimientos_id, string tipo, string detalles, string costo, string fechayhora_recepcion, string fechayhora_devolucion)
         {
             conexion cnn = new conexion();
             try
             {
                 cnn.conectar();
-                string consulta = "UPDATE obsoletos SET informe=@informe, motivo=@motivo, disposicion=@disposicion WHERE obsoletos_id=@obsoletos_id";
+                string consulta = "UPDATE mantenimentos SET tipo=@tipo, detalles=@detalles, costo=@costo, " +
+                                  "fechayhora_recepcion=@fechayhora_recepcion, fechayhora_devolucion=@fechayhora_devolucion WHERE mantenimientos_id=@mantenimientos_id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
-                cmd.Parameters.AddWithValue("@informe", informe);
-                cmd.Parameters.AddWithValue("@motivo", motivo);
-                cmd.Parameters.AddWithValue("@disposicion", disposicion);
-                cmd.Parameters.AddWithValue("@obsoletos_id", obsoletos_id);
+                cmd.Parameters.AddWithValue("@tipo", tipo);
+                cmd.Parameters.AddWithValue("@detalles", detalles);
+                cmd.Parameters.AddWithValue("@costo", costo);
+                cmd.Parameters.AddWithValue("@fechayhora_recepcion", fechayhora_recepcion);
+                cmd.Parameters.AddWithValue("@fechayhora_devolucion", fechayhora_devolucion);
+                cmd.Parameters.AddWithValue("@mantenimientos_id", mantenimientos_id);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al editar obsoletos: " + ex.Message);
+                MessageBox.Show("Error al editar el Mantenimiento: " + ex.Message);
                 return false;
             }
             finally
@@ -85,21 +90,21 @@ namespace Examen_final.Modelos
                 cnn.desconectar();
             }
         }
-        public static bool Eliminar(int obsoletos_id)
+        public static bool Eliminar(int mantenimientos_id)
         {
             conexion cnn = new conexion();
             try
             {
                 cnn.conectar();
-                string consulta = "DELETE FROM obsoletos WHERE obsoletos_id=@obsoletos_id";
+                string consulta = "DELETE FROM mantenimientos WHERE mantenimientos_id=@mantenimientos_id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
-                cmd.Parameters.AddWithValue("@obsoletos_id", obsoletos_id);
+                cmd.Parameters.AddWithValue("@mantenimientos_id", mantenimientos_id);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al eliminar obsoletos: " + ex.Message);
+                MessageBox.Show("Error al eliminar mantenimiento: " + ex.Message);
                 return false;
             }
             finally

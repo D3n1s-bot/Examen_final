@@ -74,8 +74,8 @@
     <Compile Include="Modelos\edificio.cs" />
     <Compile Include="Modelos\empleados.cs" />
     <Compile Include="Modelos\equipos.cs" />
-    <Compile Include="Modelos\mantenimientos.cs" />
-    <Compile Include="Modelos\obsoletos.cs" />
+    <Compile Include="Modelos\mantenimiento.cs" />
+    <Compile Include="Modelos\obsoleto.cs" />
     <Compile Include="Modelos\oficinas.cs" />
     <Compile Include="Modelos\proveedores.cs" />
     <Compile Include="Modelos\tipo_equipos.cs" />
