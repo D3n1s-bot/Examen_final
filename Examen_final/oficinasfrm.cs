@@ -24,7 +24,7 @@ namespace Examen_final
             dataGridView1.DataSource = oficinas.obtener();
             if (dataGridView1.Rows.Count > 0)
             {
-                dataGridView1.Columns["id_empleado"].Visible = false;
+                dataGridView1.Columns["id"].Visible = false;
             }
 
         }
@@ -61,7 +61,7 @@ namespace Examen_final
         {
             if(dataGridView1.SelectedRows.Count > 0)
             {
-                oficina_id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id_oficina"].Value);
+                oficina_id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
                 txttipo.Text = dataGridView1.SelectedRows[0].Cells["tipo"].Value.ToString();
             }
             else
@@ -72,7 +72,7 @@ namespace Examen_final
 
         private void button3_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id_oficina"].Value);
+            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
             bool resultado = oficinas.Eliminar(id);
             if (resultado)
             {

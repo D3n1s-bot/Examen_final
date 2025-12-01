@@ -59,17 +59,17 @@ namespace Examen_final.Modelos
                 cnn.desconectar();
             }
         }
-        public static bool Editar(int oficinas_id, string tipo)
+        public static bool Editar(int id, string tipo)
         {
             conexion cnn = new conexion();
             try
             {
                 cnn.conectar();
                 string consulta = "UPDATE oficinas SET tipo=@tipo " +
-                                  "WHERE oficinas_id=@oficinas_id";
+                                  "WHERE id=@id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 cmd.Parameters.AddWithValue("@tipo", tipo);
-                cmd.Parameters.AddWithValue("@oficinas_id", oficinas_id);
+                cmd.Parameters.AddWithValue("@id", id);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }
@@ -89,9 +89,9 @@ namespace Examen_final.Modelos
             try
             {
                 cnn.conectar();
-                string consulta = "DELETE FROM oficinas WHERE oficina_id=@oficinas_id";
+                string consulta = "DELETE FROM oficinas WHERE id=@id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
-                cmd.Parameters.AddWithValue("@oficinas_id", oficinas_id);
+                cmd.Parameters.AddWithValue("@id", oficinas_id);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }

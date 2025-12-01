@@ -13,7 +13,7 @@ namespace Examen_final
 {
     public partial class equiposfrm : Form
     {
-        int equipos_id;
+        int equipos_id = 0;
         public equiposfrm()
         {
             InitializeComponent();
@@ -24,7 +24,8 @@ namespace Examen_final
             dataGridView1.DataSource =equipos.obtener();
             if (dataGridView1.Rows.Count > 0)
             {
-                dataGridView1.Columns["id_equipo"].Visible = false;
+                dataGridView1.Columns["id"].Visible = false;
+
             }
 
         }
@@ -35,7 +36,7 @@ namespace Examen_final
             string nombre = txtnombre.Text;
             string marca = txtmarca.Text;
             string modelo = txtmodelo.Text;
-            string fecha_adquirida = dateTimePicker1.Text;   
+            string fecha_adquirida = dateTimePicker1.Value.ToString("yyyy-MM-dd");
             string valor = txtvalor.Text;
             bool resultado = false;
             if (equipos_id == 0)
@@ -67,6 +68,7 @@ namespace Examen_final
             txtmodelo.Text = "";
             dateTimePicker1 = new DateTimePicker();
             txtvalor.Text = "";
+            txtserie.Focus();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -74,12 +76,12 @@ namespace Examen_final
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 DataGridViewRow fila = dataGridView1.SelectedRows[0];
-                equipos_id = Convert.ToInt32(fila.Cells["equipos_id"].Value);
-                txtserie.Text = fila.Cells["no_serie"].Value.ToString();
-                txtnombre.Text = fila.Cells["nombres"].Value.ToString();
+                equipos_id = Convert.ToInt32(fila.Cells["id"].Value);
+                txtserie.Text = fila.Cells["numero_serie"].Value.ToString();
+                txtnombre.Text = fila.Cells["nombre"].Value.ToString();
                 txtmarca.Text = fila.Cells["marca"].Value.ToString();
                 txtmodelo.Text = fila.Cells["modelo"].Value.ToString();
-                dateTimePicker1.Text = fila.Cells["fecha_adquirida"].Value.ToString();  
+                dateTimePicker1.Text = fila.Cells["fecha_adquierida"].Value.ToString();  
                 txtvalor.Text = fila.Cells["valor"].Value.ToString();
 
 
@@ -109,6 +111,11 @@ namespace Examen_final
         private void button4_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

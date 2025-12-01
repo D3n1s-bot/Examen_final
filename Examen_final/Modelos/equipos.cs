@@ -41,14 +41,14 @@ namespace Examen_final.Modelos
             try
             {
                 cnn.conectar();
-                string consulta = "INSERT INTO equipos ( no_serie,nombre, marca, modelo,fecha_adquirida,valor ) " +
-                                  "VALUES (@no_serie,@nombre, @marca, @modelo, @fecha_adquirida,@valor )";
+                string consulta = "INSERT INTO equipos ( numero_serie,nombre, marca, modelo,fecha_adquierida,valor ) " +
+                                  "VALUES (@no_serie,@nombre, @marca, @modelo, @fecha_ad,@valor )";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 cmd.Parameters.AddWithValue("@no_serie", no_serie);
                 cmd.Parameters.AddWithValue("@nombre", nombre);
                 cmd.Parameters.AddWithValue("@marca", marca); 
                 cmd.Parameters.AddWithValue("@modelo", modelo);
-                cmd.Parameters.AddWithValue("@fecha_aquirida", fecha_adquirida);
+                cmd.Parameters.AddWithValue("@fecha_ad", fecha_adquirida);
                 cmd.Parameters.AddWithValue("@valor", valor);
 
                 int filasAfectadas = cmd.ExecuteNonQuery();
@@ -64,22 +64,22 @@ namespace Examen_final.Modelos
                 cnn.desconectar();
             }
         }
-        public static bool Editar(int equipos_id, string no_serie, string nombre, string marca, string modelo, string fecha_adquirida, string valor)
+        public static bool Editar(int id, string numero_serie, string nombre, string marca, string modelo, string fecha_adquierida, string valor)
         {
             conexion cnn = new conexion();
             try
             {
                 cnn.conectar();
-                string consulta = "UPDATE equipos SET  no_serie=@no_serie,nombre=@nombre, fecha_adquirida=@fecha_adquirida, " +
-                                  "marca=@marca, modelo=@modelo, valor=@valor WHERE autores_id=@autores_id";
+                string consulta = "UPDATE equipos SET  numero_serie=@numero_serie,nombre=@nombre, fecha_adquierida=@fecha_adquierida, " +
+                                  "marca=@marca, modelo=@modelo, valor=@valor WHERE id=@id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
-                    cmd.Parameters.AddWithValue("@no_serie", no_serie); 
-                cmd.Parameters.AddWithValue("@nombres", nombre);
+                    cmd.Parameters.AddWithValue("@numero_serie", numero_serie); 
+                cmd.Parameters.AddWithValue("@nombre", nombre);
                 cmd.Parameters.AddWithValue("@marca", marca);
                 cmd.Parameters.AddWithValue("@modelo", modelo);
-                cmd.Parameters.AddWithValue("@fecha_adquirida", fecha_adquirida );
+                cmd.Parameters.AddWithValue("@fecha_adquierida", fecha_adquierida );
                 cmd.Parameters.AddWithValue("@valor", valor);
-                cmd.Parameters.AddWithValue("@equipos_id", equipos_id);
+                cmd.Parameters.AddWithValue("@id", id);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }
@@ -99,9 +99,9 @@ namespace Examen_final.Modelos
             try
             {
                 cnn.conectar();
-                string consulta = "DELETE FROM equipos WHERE equipos_id=@equipos_id";
+                string consulta = "DELETE FROM equipos WHERE id=@id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
-                cmd.Parameters.AddWithValue("@equipos_id", equipos_id);
+                cmd.Parameters.AddWithValue("@id", equipos_id);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }

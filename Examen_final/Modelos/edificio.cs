@@ -60,18 +60,18 @@ namespace Examen_final.Modelos
                 cnn.desconectar();
             }
         }
-        public static bool Editar(int edificios_id, string nombre, string direccion)
+        public static bool Editar(int id, string nombre, string direccion)
         {
             conexion cnn = new conexion();
             try
             {
                 cnn.conectar();
                 string consulta = "UPDATE edificio SET nombre=@nombre, direccion=@direccion" +
-                                  " WHERE edificios_id=@edificios_id";
+                                  " WHERE id=@id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 cmd.Parameters.AddWithValue("@nombre", nombre);
                 cmd.Parameters.AddWithValue("@direccion", direccion);
-                cmd.Parameters.AddWithValue("@edificios_id", edificios_id);
+                cmd.Parameters.AddWithValue("@id", id);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }
@@ -85,15 +85,15 @@ namespace Examen_final.Modelos
                 cnn.desconectar();
             }
         }
-        public static bool Eliminar(int edificios_id)
+        public static bool Eliminar(int id)
         {
             conexion cnn = new conexion();
             try
             {
                 cnn.conectar();
-                string consulta = "DELETE FROM edificios WHERE edificios_id=@edificio_id";
+                string consulta = "DELETE FROM edificios WHERE id=@id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
-                cmd.Parameters.AddWithValue("@edificios_id", edificios_id);
+                cmd.Parameters.AddWithValue("@id", id);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }

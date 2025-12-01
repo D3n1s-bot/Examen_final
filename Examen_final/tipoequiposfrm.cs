@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Examen_final.Modelos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,90 @@ namespace Examen_final
 {
     public partial class tipoequiposfrm : Form
     {
+        int tipoequipos_id = 0;
         public tipoequiposfrm()
         {
             InitializeComponent();
         }
+
+        private void tipoequiposfrm_Load(object sender, EventArgs e)
+        {
+              dataGridView1.DataSource = tipo_equipos.obtener();
+              if (dataGridView1.Rows.Count > 0)
+              {
+                   dataGridView1.Columns["provedores_id"].Visible = false;
+              }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            string nombre = txtnom.Text;
+            bool resultado = false;
+            if (tipoequipos_id == 0)
+            {
+                resultado = proveedores.Crear(nombre);
+            }
+            else
+            {
+                resultado = proveedores.Editar(tipoequipos_id, nombre);
+            }
+            if (resultado)
+            {
+                MessageBox.Show("Operación realizada con éxito");
+                dataGridView1.DataSource = proveedores.obtener();
+                limpiarCampos();
+            }
+            else
+            {
+                MessageBox.Show("Error al realizar la operación");
+
+            }
+
+        }
+        private void limpiarCampos()
+        {
+            txtnom.Text = "";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow fila = dataGridView1.SelectedRows[0];
+                tipoequipos_id = Convert.ToInt32(fila.Cells["provedores_id"].Value);
+                txtnom.Text = fila.Cells["dni"].Value.ToString();
+
+            }
+            else
+            {
+                MessageBox.Show("Seleccione una fila para editar.");
+            }
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["tipoequipos_id"].Value);
+                bool resultado = tipo_equipos.Eliminar(id);
+                if (resultado)
+                {
+                    MessageBox.Show("equipos eliminado con éxito");
+                    dataGridView1.DataSource = proveedores.obtener();
+                }
+                else
+                {
+                    MessageBox.Show("Error al eliminar el pro");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione una fila para eliminar");
+            }
+        }
     }
+
 }

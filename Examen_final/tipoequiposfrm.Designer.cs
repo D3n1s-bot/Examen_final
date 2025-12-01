@@ -73,6 +73,7 @@
             this.button4.TabIndex = 4;
             this.button4.Text = "Eliminar";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -91,6 +92,7 @@
             this.button2.TabIndex = 3;
             this.button2.Text = "Editar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -100,6 +102,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtnom
             // 
@@ -139,6 +142,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "tipoequiposfrm";
             this.Text = "tipoequiposfrm";
+            this.Load += new System.EventHandler(this.tipoequiposfrm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);

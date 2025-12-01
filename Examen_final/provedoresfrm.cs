@@ -24,7 +24,7 @@ namespace Examen_final
             dataGridView1.DataSource = proveedores.obtener();
             if (dataGridView1.Rows.Count > 0)
             {
-                dataGridView1.Columns["provedores_id"].Visible = false;
+                dataGridView1.Columns["edificios_id"].Visible = false;
             }
         }
 
@@ -61,33 +61,25 @@ namespace Examen_final
         {
             if(dataGridView1.SelectedRows.Count > 0)
             {
-                int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["provedores_id"].Value);
-                bool resultado = proveedores.Eliminar(id);
-                if (resultado)
-                {
-                    MessageBox.Show("Proveedor eliminado con éxito");
-                    dataGridView1.DataSource = proveedores.obtener();
-                }
-                else
-                {
-                    MessageBox.Show("Error al eliminar el proveedor");
-                }
+                DataGridViewRow fila = dataGridView1.SelectedRows[0];
+                provedores_id = Convert.ToInt32(fila.Cells["proveedores_id"].Value);
+                txtnomb.Text = fila.Cells["dni"].Value.ToString();
+              
             }
             else
             {
-                MessageBox.Show("Seleccione una fila para eliminar");
+                MessageBox.Show("Seleccione una fila para editar.");
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id_oficina"].Value);
-            bool resultado = oficinas.Eliminar(id);
+            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["provedores_id"].Value);
+            bool resultado = proveedores.Eliminar(id);
             if (resultado)
             {
-                MessageBox.Show("Oficina eliminada con éxito");
-                dataGridView1.DataSource = oficinas.obtener();
+                MessageBox.Show("provedores eliminada con éxito");
+                dataGridView1.DataSource = proveedores.obtener();
             }
             else
             {
