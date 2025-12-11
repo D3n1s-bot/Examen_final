@@ -17,7 +17,8 @@ namespace Examen_final.Modelos
             try
             {
                 cnn.conectar();
-                string consulta = "SELECT * FROM obsoletos";
+               
+                string consulta = "SELECT o.*,e.numero_serie FROM obsoletos o left join equipos e on o.id_equipo=e.id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 SqlDataAdapter adaptador = new SqlDataAdapter(cmd);
                 DataTable tabla = new DataTable();
@@ -35,18 +36,19 @@ namespace Examen_final.Modelos
             }
 
         }
-        public static bool Crear(string informe, string motivo, string disposicion)
+        public static bool Crear(string informe, string motivo, string disposicion,int id_equipo)
         {
             conexion cnn = new conexion();
             try
             {
                 cnn.conectar();
-                string consulta = "INSERT INTO obsoletos (informe, motivo, disposicion) VALUES (@informe, @motivo, @disposicion)";
+                string consulta = "INSERT INTO obsoletos (informe, motivo, disposicion,id_equipo) VALUES (@informe, @motivo, @disposicion,@id_equipo)";
                                  
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 cmd.Parameters.AddWithValue("@informe",informe);
                 cmd.Parameters.AddWithValue("@motivo", motivo);
-                cmd.Parameters.AddWithValue("@costo", disposicion);
+                cmd.Parameters.AddWithValue("@disposicion", disposicion);
+                cmd.Parameters.AddWithValue("@id_equipo", id_equipo);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }
@@ -60,18 +62,19 @@ namespace Examen_final.Modelos
                 cnn.desconectar();
             }
         }
-        public static bool Editar(int obsoletos_id, string informe, string motivo, string disposicion)
+        public static bool Editar(int id, string informe, string motivo, string disposicion,int id_equipo)
         {
             conexion cnn = new conexion();
             try
             {
                 cnn.conectar();
-                string consulta = "UPDATE obsoletos SET informe=@informe, motivo=@motivo, disposicion=@disposicion WHERE obsoletos_id=@obsoletos_id";
+                string consulta = "UPDATE obsoletos SET informe=@informe, motivo=@motivo, disposicion=@disposicion,id_equipo=@id_equipo WHERE id=@obsoletos_id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 cmd.Parameters.AddWithValue("@informe", informe);
                 cmd.Parameters.AddWithValue("@motivo", motivo);
                 cmd.Parameters.AddWithValue("@disposicion", disposicion);
-                cmd.Parameters.AddWithValue("@obsoletos_id", obsoletos_id);
+                cmd.Parameters.AddWithValue("@obsoletos_id", id);
+                cmd.Parameters.AddWithValue("@id_equipo", id_equipo);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }
@@ -91,7 +94,7 @@ namespace Examen_final.Modelos
             try
             {
                 cnn.conectar();
-                string consulta = "DELETE FROM obsoletos WHERE obsoletos_id=@obsoletos_id";
+                string consulta = "DELETE FROM obsoletos WHERE id=@obsoletos_id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 cmd.Parameters.AddWithValue("@obsoletos_id", obsoletos_id);
                 int filasAfectadas = cmd.ExecuteNonQuery();

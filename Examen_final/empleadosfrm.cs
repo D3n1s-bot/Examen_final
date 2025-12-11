@@ -24,7 +24,7 @@ namespace Examen_final
             dataGridView1.DataSource = empleados.obtener();
             if (dataGridView1.Rows.Count > 0)
             {
-                dataGridView1.Columns["id_empleado"].Visible = false;
+                dataGridView1.Columns["id"].Visible = false;
             }
 
         }
@@ -68,10 +68,10 @@ namespace Examen_final
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 DataGridViewRow fila = dataGridView1.SelectedRows[0];
-                empleados_id = Convert.ToInt32(fila.Cells["empleados_id"].Value);
+                empleados_id = Convert.ToInt32(fila.Cells["id"].Value);
                 txtdni.Text = fila.Cells["dni"].Value.ToString();
-                txtnombre.Text = fila.Cells["nombres"].Value.ToString();
-                txtampellidos.Text = fila.Cells["apellidos"].Value.ToString();
+                txtnombre.Text = fila.Cells["nombre"].Value.ToString();
+                txtampellidos.Text = fila.Cells["apellido"].Value.ToString();
             }
             else
             {
@@ -102,6 +102,26 @@ namespace Examen_final
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
+            bool resultado = empleados.Eliminar(id);
+            if (resultado)
+            {
+                MessageBox.Show("Autor eliminado con éxito.");
+                dataGridView1.DataSource = empleados.obtener();
+            }
+            else
+            {
+                MessageBox.Show("Error al eliminar el autor.");
+            }
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

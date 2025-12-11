@@ -25,50 +25,20 @@ namespace Examen_final
             dataGridView1.DataSource = edificio.obtener();
             if (dataGridView1.Rows.Count > 0)
             {
-                dataGridView1.Columns["edificios_id"].Visible = false;
+                dataGridView1.Columns["id"].Visible = false;
             }
 
         }
-        private void botton1_Click(object sender, EventArgs e)
-        {
-            string nombre = txtnom_e.Text;
-            string direccion = txtdire.Text;
-            bool resultado = false;
-            if (edificios_id == 0)
-            {
-                resultado = edificio.Crear(nombre, direccion);
-            }
-            else
-            {
-                resultado = edificio.Editar(edificios_id, nombre, direccion);
-            }
-            if (resultado)
-            {
-                MessageBox.Show("Operación exitosa");
-                dataGridView1.DataSource = edificio.obtener();
-                limpiar();
-            }
-            else
-            {
-                MessageBox.Show("Error en la operación");
-            }
-            
-        }
-        private void limpiar()
-        {
-            txtnom_e.Text = "";
-            txtdire.Text = "";
-            edificios_id = 0;
-        }
+  
 
         private void button2_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 DataGridViewRow fila = dataGridView1.SelectedRows[0];
-                edificios_id = Convert.ToInt32(fila.Cells["edificios_id"].Value);
-                txtnom_e.Text = fila.Cells["nombres"].Value.ToString();
-                txtdire.Text = fila.Cells["apellidos"].Value.ToString();
+                edificios_id = Convert.ToInt32(fila.Cells["id"].Value);
+                txtnom_e.Text = fila.Cells["nombre"].Value.ToString();
+                txtdire.Text = fila.Cells["direccion"].Value.ToString();
                
             }
             else
@@ -77,7 +47,41 @@ namespace Examen_final
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+        {
+            {
+                string nombre = txtnom_e.Text;
+                string direccion = txtdire.Text;
+                bool resultado = false;
+                if (edificios_id == 0)
+                {
+                    resultado = edificio.Crear(nombre, direccion);
+                }
+                else
+                {
+                    resultado = edificio.Editar(edificios_id, nombre, direccion);
+                }
+                if (resultado)
+                {
+                    MessageBox.Show("Operación exitosa");
+                    dataGridView1.DataSource = edificio.obtener();
+                    limpiar();
+                }
+                else
+                {
+                    MessageBox.Show("Error en la operación");
+                }
+
+            }
+        }
+        private void limpiar()
+        {
+            txtnom_e.Text = "";
+            txtdire.Text = "";
+            edificios_id = 0;
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
             bool resultado = edificio.Eliminar(id);
@@ -92,9 +96,10 @@ namespace Examen_final
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click_1(object sender, EventArgs e)
         {
             Close();
         }
     }
-}    
+    
+}   

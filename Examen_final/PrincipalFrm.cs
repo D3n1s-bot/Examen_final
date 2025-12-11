@@ -40,11 +40,17 @@ namespace Examen_final
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            obsoletos obs = new obsoletos();
-            obs.MdiParent = this;
-            obs.Show();
+            try
+            {
+                obsoletosfrm frm = new obsoletosfrm();
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al abrir el formulario de obsoletos: " + ex.Message);
+            }
         }
-
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
             mantenimientos mant= new mantenimientos();
@@ -72,6 +78,13 @@ namespace Examen_final
             tipoequiposfrm tipoequipos = new tipoequiposfrm();
             tipoequipos.MdiParent = this;
             tipoequipos.Show();
+        }
+
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+            edificiosfrm edificios = new edificiosfrm();
+            edificios.MdiParent = this;
+            edificios.Show();
         }
     }
 }

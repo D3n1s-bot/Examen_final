@@ -24,7 +24,7 @@ namespace Examen_final
               dataGridView1.DataSource = tipo_equipos.obtener();
               if (dataGridView1.Rows.Count > 0)
               {
-                   dataGridView1.Columns["provedores_id"].Visible = false;
+                   dataGridView1.Columns["id"].Visible = false;
               }
 
         }
@@ -36,16 +36,16 @@ namespace Examen_final
             bool resultado = false;
             if (tipoequipos_id == 0)
             {
-                resultado = proveedores.Crear(nombre);
+                resultado = tipo_equipos.Crear(nombre);
             }
             else
             {
-                resultado = proveedores.Editar(tipoequipos_id, nombre);
+                resultado = tipo_equipos.Editar(tipoequipos_id, nombre);
             }
             if (resultado)
             {
                 MessageBox.Show("Operación realizada con éxito");
-                dataGridView1.DataSource = proveedores.obtener();
+                dataGridView1.DataSource = tipo_equipos.obtener();
                 limpiarCampos();
             }
             else
@@ -65,8 +65,8 @@ namespace Examen_final
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 DataGridViewRow fila = dataGridView1.SelectedRows[0];
-                tipoequipos_id = Convert.ToInt32(fila.Cells["provedores_id"].Value);
-                txtnom.Text = fila.Cells["dni"].Value.ToString();
+                tipoequipos_id = Convert.ToInt32(fila.Cells["id"].Value);
+                txtnom.Text = fila.Cells["nombre"].Value.ToString();
 
             }
             else
@@ -80,12 +80,12 @@ namespace Examen_final
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["tipoequipos_id"].Value);
+                int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
                 bool resultado = tipo_equipos.Eliminar(id);
                 if (resultado)
                 {
                     MessageBox.Show("equipos eliminado con éxito");
-                    dataGridView1.DataSource = proveedores.obtener();
+                    dataGridView1.DataSource = tipo_equipos.obtener();
                 }
                 else
                 {
@@ -96,6 +96,11 @@ namespace Examen_final
             {
                 MessageBox.Show("Seleccione una fila para eliminar");
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 

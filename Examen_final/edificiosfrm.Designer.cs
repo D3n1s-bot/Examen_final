@@ -53,6 +53,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.splitContainer1.Panel1.Controls.Add(this.button4);
             this.splitContainer1.Panel1.Controls.Add(this.button3);
             this.splitContainer1.Panel1.Controls.Add(this.button2);
@@ -65,65 +66,72 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
-            this.splitContainer1.Size = new System.Drawing.Size(811, 335);
-            this.splitContainer1.SplitterDistance = 270;
+            this.splitContainer1.Size = new System.Drawing.Size(603, 232);
+            this.splitContainer1.SplitterDistance = 200;
             this.splitContainer1.TabIndex = 0;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(134, 257);
+            this.button4.BackColor = System.Drawing.Color.DarkKhaki;
+            this.button4.Location = new System.Drawing.Point(100, 177);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 7;
             this.button4.Text = "Cerrar";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(13, 257);
+            this.button3.BackColor = System.Drawing.Color.DarkKhaki;
+            this.button3.Location = new System.Drawing.Point(13, 177);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 6;
             this.button3.Text = "Eliminar";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(134, 208);
+            this.button2.BackColor = System.Drawing.Color.DarkKhaki;
+            this.button2.Location = new System.Drawing.Point(100, 138);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 5;
             this.button2.Text = "Editar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(13, 208);
+            this.button1.BackColor = System.Drawing.Color.DarkKhaki;
+            this.button1.Location = new System.Drawing.Point(12, 138);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
             this.button1.Text = "Guardar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtdire
             // 
-            this.txtdire.Location = new System.Drawing.Point(56, 159);
+            this.txtdire.Location = new System.Drawing.Point(13, 72);
             this.txtdire.Name = "txtdire";
-            this.txtdire.Size = new System.Drawing.Size(100, 22);
+            this.txtdire.Size = new System.Drawing.Size(162, 22);
             this.txtdire.TabIndex = 3;
             // 
             // txtnom_e
             // 
-            this.txtnom_e.Location = new System.Drawing.Point(56, 79);
+            this.txtnom_e.Location = new System.Drawing.Point(13, 28);
             this.txtnom_e.Name = "txtnom_e";
-            this.txtnom_e.Size = new System.Drawing.Size(100, 22);
+            this.txtnom_e.Size = new System.Drawing.Size(162, 22);
             this.txtnom_e.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(66, 126);
+            this.label2.Location = new System.Drawing.Point(53, 53);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 16);
             this.label2.TabIndex = 1;
@@ -132,7 +140,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(78, 50);
+            this.label1.Location = new System.Drawing.Point(53, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 16);
             this.label1.TabIndex = 0;
@@ -149,14 +157,15 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(537, 335);
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(399, 232);
             this.dataGridView1.TabIndex = 0;
             // 
             // edificiosfrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(811, 335);
+            this.ClientSize = new System.Drawing.Size(603, 232);
             this.Controls.Add(this.splitContainer1);
             this.Name = "edificiosfrm";
             this.Text = "edificiosfrm";

@@ -10,7 +10,7 @@ namespace Examen_final
     internal class conexion
     {
         SqlConnection cnn = new SqlConnection(
-           "data source=192.168.10.2;user id=sa;Password=Hyp3r10nPr0_;database=inventario_edif;TrustServerCertificate=true");
+          " data source = 172.16.0.20; user id = sa; Password=Hyp3r10nPr0_;database=inventario_edif;TrustServerCertificate=true");
         public SqlConnection conectar()
         {
             if (cnn.State == System.Data.ConnectionState.Closed)

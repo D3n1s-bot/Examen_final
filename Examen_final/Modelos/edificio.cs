@@ -66,7 +66,7 @@ namespace Examen_final.Modelos
             try
             {
                 cnn.conectar();
-                string consulta = "UPDATE edificio SET nombre=@nombre, direccion=@direccion" +
+                string consulta = "UPDATE edificios SET nombre=@nombre, direccion=@direccion" +
                                   " WHERE id=@id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 cmd.Parameters.AddWithValue("@nombre", nombre);

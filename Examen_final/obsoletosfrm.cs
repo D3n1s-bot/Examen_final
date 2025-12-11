@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace Examen_final
 {
-    public partial class obsoletos : Form
+    public partial class obsoletosfrm : Form
     {
-        int obsoletos_id;
-        public obsoletos()
+        int obsoletos_id=0;
+        public obsoletosfrm()
         {
             InitializeComponent();
         }
@@ -24,8 +24,11 @@ namespace Examen_final
             dataGridView1.DataSource = obsoleto.obtener();
             if (dataGridView1.Rows.Count > 0)
             {
-                dataGridView1.Columns["id_empleado"].Visible = false;
+                dataGridView1.Columns["id"].Visible = false;
             }
+            comboBox1.DataSource = equipos.obtener();
+            comboBox1.DisplayMember = "numero_serie";
+            comboBox1.ValueMember = "id";
 
         }
 
@@ -34,14 +37,15 @@ namespace Examen_final
             string informe = txtinforme.Text;
             string motivo = txtmotivo.Text;
             string disposicion = txtdescripcion.Text;
+            int id_equipo = Convert.ToInt32( comboBox1.SelectedValue);
             bool resultado = false;
             if (obsoletos_id == 0)
             {
-                resultado = obsoleto.Crear(informe, motivo, disposicion);
+                resultado = obsoleto.Crear(informe, motivo, disposicion,id_equipo);
             }
             else
             {
-                resultado = obsoleto.Editar(obsoletos_id, informe, motivo, disposicion);
+                resultado = obsoleto.Editar(obsoletos_id, informe, motivo, disposicion, id_equipo);
             }
             if (resultado)
             {
@@ -60,16 +64,18 @@ namespace Examen_final
             txtmotivo.Text = "";
             txtdescripcion.Text = "";
             obsoletos_id = 0;
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                obsoletos_id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id_obsoleto"].Value);
+                obsoletos_id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
                 txtinforme.Text = dataGridView1.SelectedRows[0].Cells["informe"].Value.ToString();
                 txtmotivo.Text = dataGridView1.SelectedRows[0].Cells["motivo"].Value.ToString();
                 txtdescripcion.Text = dataGridView1.SelectedRows[0].Cells["disposicion"].Value.ToString();
+                comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["id_equipo"].Value.ToString();
             }
             else
             {
@@ -79,7 +85,7 @@ namespace Examen_final
 
         private void button4_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id_obsoleto"].Value);
+            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
             bool resultado = obsoleto.Eliminar(id);
             if (resultado)
             {

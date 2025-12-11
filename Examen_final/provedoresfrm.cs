@@ -24,7 +24,7 @@ namespace Examen_final
             dataGridView1.DataSource = proveedores.obtener();
             if (dataGridView1.Rows.Count > 0)
             {
-                dataGridView1.Columns["edificios_id"].Visible = false;
+                dataGridView1.Columns["id"].Visible = false;
             }
         }
 
@@ -62,8 +62,8 @@ namespace Examen_final
             if(dataGridView1.SelectedRows.Count > 0)
             {
                 DataGridViewRow fila = dataGridView1.SelectedRows[0];
-                provedores_id = Convert.ToInt32(fila.Cells["proveedores_id"].Value);
-                txtnomb.Text = fila.Cells["dni"].Value.ToString();
+                provedores_id = Convert.ToInt32(fila.Cells["id"].Value);
+                txtnomb.Text = fila.Cells["nombre"].Value.ToString();
               
             }
             else
@@ -74,7 +74,7 @@ namespace Examen_final
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["provedores_id"].Value);
+            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
             bool resultado = proveedores.Eliminar(id);
             if (resultado)
             {

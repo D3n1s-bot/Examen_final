@@ -13,7 +13,7 @@ namespace Examen_final
 {
     public partial class oficinasfrm : Form
     {
-        int oficina_id=0;
+        int id=0;
         public oficinasfrm()
         {
             InitializeComponent();
@@ -25,21 +25,28 @@ namespace Examen_final
             if (dataGridView1.Rows.Count > 0)
             {
                 dataGridView1.Columns["id"].Visible = false;
+                dataGridView1.Columns["id_edificio"].Visible = false;
             }
+            comboBox1.DataSource = edificio.obtener();
+            comboBox1.DisplayMember = "nombre";
+            comboBox1.ValueMember = "id";
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //string oficina = comboBox1
             string tipo = txttipo.Text;
+            int id_edificio = Convert.ToInt32(comboBox1.SelectedValue);
+            //MessageBox.Show(Convert.ToString(id_edificio));
             bool resultado = false;
-            if (oficina_id == 0)
+            if (id == 0)
             {
-                resultado = oficinas.Crear(tipo);
+                resultado = oficinas.Crear(tipo,id_edificio);
             }
             else
             {
-                resultado = oficinas.Editar(oficina_id, tipo);
+                resultado = oficinas.Editar(id, id_edificio, tipo);
             }
             if (resultado)
             {
@@ -61,8 +68,9 @@ namespace Examen_final
         {
             if(dataGridView1.SelectedRows.Count > 0)
             {
-                oficina_id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
+                id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
                 txttipo.Text = dataGridView1.SelectedRows[0].Cells["tipo"].Value.ToString();
+                comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["id_edificio"].Value.ToString();
             }
             else
             {
@@ -88,6 +96,11 @@ namespace Examen_final
         private void button4_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txttipo_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

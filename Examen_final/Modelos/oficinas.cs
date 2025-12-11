@@ -17,7 +17,7 @@ namespace Examen_final.Modelos
             try
             {
                 cnn.conectar();
-                string consulta = "SELECT * FROM oficinas";
+                string consulta = "select o.*,e.nombre as edificio from oficinas o inner join edificios e on o.id_edificio = e.id;";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 SqlDataAdapter adaptador = new SqlDataAdapter(cmd);
                 DataTable tabla = new DataTable();
@@ -35,17 +35,18 @@ namespace Examen_final.Modelos
             }
 
         }
-        public static bool Crear(string tipo)
+        public static bool Crear(string tipo,int id_edificio)
         {
             conexion cnn = new conexion();
             try
             {
                 cnn.conectar();
-                string consulta = "INSERT INTO oficinas (tipo) " +
-                                  "VALUES (@tipo  )";
+                string consulta = "INSERT INTO oficinas (tipo,id_edificio) " +
+                                  "VALUES (@tipo,@id_edificio)";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 cmd.Parameters.AddWithValue("@tipo", tipo);
-                
+                cmd.Parameters.AddWithValue("@id_edificio", id_edificio);
+
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }
@@ -59,17 +60,18 @@ namespace Examen_final.Modelos
                 cnn.desconectar();
             }
         }
-        public static bool Editar(int id, string tipo)
+        public static bool Editar(int id,int id_edificio,string tipo)
         {
             conexion cnn = new conexion();
             try
             {
                 cnn.conectar();
-                string consulta = "UPDATE oficinas SET tipo=@tipo " +
+                string consulta = "UPDATE oficinas SET tipo=@tipo, id_edificio=@id_edificio  " +
                                   "WHERE id=@id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 cmd.Parameters.AddWithValue("@tipo", tipo);
                 cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@id_edificio", id_edificio);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }

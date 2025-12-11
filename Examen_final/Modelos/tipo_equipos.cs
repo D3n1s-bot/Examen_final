@@ -17,7 +17,7 @@ namespace Examen_final.Modelos
             try
             {
                 cnn.conectar();
-                string consulta = "SELECT * FROM tipo_equipos";
+                string consulta = "SELECT * FROM tipos_equipos";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 SqlDataAdapter adaptador = new SqlDataAdapter(cmd);
                 DataTable tabla = new DataTable();
@@ -41,7 +41,7 @@ namespace Examen_final.Modelos
             try
             {
                 cnn.conectar();
-                string consulta = "INSERT INTO tipo_equipos(nombre) " +
+                string consulta = "INSERT INTO tipos_equipos(nombre) " +
                                   "VALUES (@nombre)";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 cmd.Parameters.AddWithValue("nombre", nombre);
@@ -58,22 +58,22 @@ namespace Examen_final.Modelos
                 cnn.desconectar();
             }
         }
-        public static bool Editar(int tipo_equipos_id, string nombre)
+        public static bool Editar(int tipos_equipos_id, string nombre)
         {
             conexion cnn = new conexion();
             try
             {
                 cnn.conectar();
-                string consulta = "UPDATE tipo_equipos SET nombre=@nombre WHERE tipo_equipos_id=@tipo_equpos_id";
+                string consulta = "UPDATE tipos_equipos SET nombre=@nombre WHERE id=@id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 cmd.Parameters.AddWithValue("@nombre", nombre);
-                cmd.Parameters.AddWithValue("@tipo_equipos_id", tipo_equipos_id);
+                cmd.Parameters.AddWithValue("@id", tipos_equipos_id);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al editar el tipo_equipos: " + ex.Message);
+                MessageBox.Show("Error al editar el tipos_equipos: " + ex.Message);
                 return false;
             }
             finally
@@ -87,9 +87,9 @@ namespace Examen_final.Modelos
             try
             {
                 cnn.conectar();
-                string consulta = "DELETE FROM tipo_equipos WHERE mantenimientos_id=@mantenimientos_id";
+                string consulta = "DELETE FROM tipos_equipos WHERE id=@id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
-                cmd.Parameters.AddWithValue("@tipo_equipos_id", tipo_id);
+                cmd.Parameters.AddWithValue("@id", tipo_id);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }

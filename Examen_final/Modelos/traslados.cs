@@ -17,7 +17,7 @@ namespace Examen_final.Modelos
             try
             {
                 cnn.conectar();
-                string consulta = "SELECT * FROM traslados";
+                string consulta = "SELECT * FROM traslados order by id desc";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 SqlDataAdapter adaptador = new SqlDataAdapter(cmd);
                 DataTable tabla = new DataTable();
@@ -59,18 +59,17 @@ namespace Examen_final.Modelos
                 cnn.desconectar();
             }
         }
-        public static bool Editar(int traslados_id, string fechayhora_salida, string fechayhora_entrega)
+        public static bool Editar(int id, string fechayhora_salida, string fechayhora_entrega)
         {
             conexion cnn = new conexion();
             try
             {
                 cnn.conectar();
-                string consulta = "UPDATE traslados SET fechayhora_salida=@fechayhora_salida, fechayhora_entrega=@fechayhora_entrega, " +
-                                  " WHERE traslados_id=@traslados_id";
+                string consulta = "UPDATE traslados SET fechayhora_salida=@fechayhora_salida, fechayhora_entrega=@fechayhora_entrega WHERE id=@id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 cmd.Parameters.AddWithValue("@fechayhora_salida", fechayhora_salida);
                 cmd.Parameters.AddWithValue("@fechayhora_entrega", fechayhora_entrega);
-                cmd.Parameters.AddWithValue("@traslados_id", traslados_id);
+                cmd.Parameters.AddWithValue("@id", id);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }
@@ -90,9 +89,9 @@ namespace Examen_final.Modelos
             try
             {
                 cnn.conectar();
-                string consulta = "DELETE FROM traslados WHERE traslados_id=@traslados_id";
+                string consulta = "DELETE FROM traslados WHERE traslados_id=@id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
-                cmd.Parameters.AddWithValue("@traslados_id", traslados_id);
+                cmd.Parameters.AddWithValue("@id", traslados_id);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }

@@ -88,7 +88,7 @@ namespace Examen_final.Modelos
             try
             {
                 cnn.conectar();
-                string consulta = "DELETE FROM proveedores WHERE proveedores_id=@proveedores_id";
+                string consulta = "DELETE FROM proveedores WHERE id=@proveedores_id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 cmd.Parameters.AddWithValue("@proveedores_id", proveedores_id);
                 int filasAfectadas = cmd.ExecuteNonQuery();

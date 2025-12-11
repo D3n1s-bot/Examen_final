@@ -27,6 +27,12 @@ namespace Examen_final
                 dataGridView1.Columns["id"].Visible = false;
 
             }
+            comboBox1.DataSource = proveedores.obtener();
+            comboBox1.DisplayMember = "nombre";
+            comboBox1.ValueMember = "id";
+            comboBox2.DataSource = tipo_equipos.obtener();
+            comboBox2.DisplayMember = "nombre";
+            comboBox2.ValueMember = "id";
 
         }
 
@@ -38,14 +44,19 @@ namespace Examen_final
             string modelo = txtmodelo.Text;
             string fecha_adquirida = dateTimePicker1.Value.ToString("yyyy-MM-dd");
             string valor = txtvalor.Text;
+            int id_proveedor= Convert.ToInt32(comboBox1.SelectedValue);
+            int id_tipo_equipo = Convert.ToInt32(comboBox2.SelectedValue);
+
             bool resultado = false;
             if (equipos_id == 0)
             {
-                resultado = equipos.Crear(no_serie, nombre, marca, modelo, fecha_adquirida, valor);
+                MessageBox.Show(Convert.ToString(id_tipo_equipo));
+
+                resultado = equipos.Crear(no_serie, nombre, marca, modelo, fecha_adquirida, valor,id_proveedor,id_tipo_equipo);
             }
             else
             {
-                resultado = equipos.Editar(equipos_id, no_serie, nombre, marca, modelo, fecha_adquirida, valor);
+                resultado = equipos.Editar(equipos_id, no_serie, nombre, marca, modelo, fecha_adquirida, valor,id_tipo_equipo,id_proveedor);
             }
             if (resultado)
             {
@@ -83,7 +94,8 @@ namespace Examen_final
                 txtmodelo.Text = fila.Cells["modelo"].Value.ToString();
                 dateTimePicker1.Text = fila.Cells["fecha_adquierida"].Value.ToString();  
                 txtvalor.Text = fila.Cells["valor"].Value.ToString();
-
+                comboBox2.SelectedItem = dataGridView1.SelectedRows[0].Cells["id_tipo_equipo"].Value.ToString();
+                comboBox1.SelectedItem = dataGridView1.SelectedRows[0].Cells["id_proveedor"].Value.ToString();
 
             }
             else
@@ -114,6 +126,11 @@ namespace Examen_final
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged_1(object sender, EventArgs e)
         {
 
         }

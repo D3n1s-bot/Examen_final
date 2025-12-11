@@ -41,7 +41,7 @@ namespace Examen_final.Modelos
             try
             {
                 cnn.conectar();
-                string consulta = "INSERT INTO empleados (dni, nombre, apellidos) " +
+                string consulta = "INSERT INTO empleados (dni, nombre, apellido) " +
                                   "VALUES (@dni, @nombre, @apellido)";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 cmd.Parameters.AddWithValue("@dni", dni);
@@ -66,12 +66,12 @@ namespace Examen_final.Modelos
             try
             {
                 cnn.conectar();
-                string consulta = "UPDATE empleados SET dni=@dni, nombre=@nombre, apellido=@apellido WHERE empleados_id=@empleados_id";
+                string consulta = "UPDATE empleados SET dni=@dni, nombre=@nombre, apellido=@apellido WHERE id=@id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
                 cmd.Parameters.AddWithValue("@dni", dni);
                 cmd.Parameters.AddWithValue("@nombre", nombre);
                 cmd.Parameters.AddWithValue("@apellido", apellido);
-                cmd.Parameters.AddWithValue("@empleados_id", empleados_id);
+                cmd.Parameters.AddWithValue("@id", empleados_id);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }
@@ -91,9 +91,9 @@ namespace Examen_final.Modelos
             try
             {
                 cnn.conectar();
-                string consulta = "DELETE FROM empleados WHERE empleados_id=@empleados_id";
+                string consulta = "DELETE FROM empleados WHERE id=@id";
                 SqlCommand cmd = new SqlCommand(consulta, cnn.conectar());
-                cmd.Parameters.AddWithValue("@empleados_id", empleados_id);
+                cmd.Parameters.AddWithValue("@id", empleados_id);
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
             }
